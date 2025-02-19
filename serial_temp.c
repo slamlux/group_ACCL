@@ -4,7 +4,7 @@
 
 void initialise_vector(double vector[], int size, double initial);
 double T_equilibrium_global(int T0, int T1, int T2);
-double T_equilibrium(int T0, int T1);
+double T_equilibrium(double T0, double T1);
 double T_time(double T_eq, double T0, double step_size);
 int check_args(int argc, char **argv);
 void print_header(FILE** p_out_file, int points);
@@ -36,9 +36,8 @@ int main(int argc, char **argv)
 	double* temperatures = (double*) malloc(points * sizeof(double));
 	// and initialises every element to zero
 	temperatures[0] = T0;
-	temperatures[1] = T1;
-	temperatures[2] = T2;
-	//initialise_vector(temperatures, points, 0.0);
+	initialise_vector(temperatures, points, 270.0);
+	temperatures[0] = T0;
 
 	T_global = T_equilibrium_global(T0, T1, T2);
 	T_eq = T_equilibrium(T0, T1);
@@ -110,7 +109,7 @@ double T_equilibrium_global(int T0, int T1, int T2)
 }
 
 
-double T_equilibrium(int T0, int T1)
+double T_equilibrium(double T0, double T1)
 {	
 	double T_eq = 0;	
 	T_eq = (T0 + T1) / 2;
@@ -166,11 +165,23 @@ void update_temperatures(double* temperatures, int points, double time_step, dou
 {
 	// creates a temporary vector variable for the new positions
         double* new_temperatures = (double*) malloc(points * sizeof(double));
+	
+	double T_eq_i = T_equilibrium(temperatures[0],temperatures[1]);
+	new_temperatures[0] = T_time(T_eq_i, temperatures[0], time_step);
+
+	double T_eq_f = T_equilibrium(temperatures[points-2],temperatures[points-1]);
+	new_temperatures[points-1] = T_time(T_eq_f, temperatures[points-1], time_step);
+
 
 	// creates new positions by setting value of previous element 
-	for (int i = 0; i < points; i++)
+	for (int i = 1; i < (points-1); i++)
 	{
-		new_temperatures[i] = T_time(T_eq, temperatures[i], time_step);
+		double T_eq1 = T_equilibrium(temperatures[i],temperatures[i+1]);
+		double T_eq2 = T_equilibrium(temperatures[i],temperatures[i-1]);
+		double T1 = T_time(T_eq1, temperatures[i], time_step);
+		double T2 = T_time(T_eq2, temperatures[i], time_step);
+
+		new_temperatures[i] = T1 + T2 - temperatures[i];
 	}
 	// propagates these new positions to the old ones
 	for (int i = 0; i < points; i++)
