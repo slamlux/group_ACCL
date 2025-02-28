@@ -1,2 +1,6 @@
-# grop_ACCL
-# assume you have a bin file
+# group_ACCL
+# Basis of the model
+# Assumption of the model
+# Serial implemetation 
+# Parallel implementation
+# Limitations
