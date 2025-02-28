@@ -15,7 +15,9 @@ Each segment will be represented by a vector. Each vector will describe qualties
  **T<sub>eq</sub> = (m<sub>1</sub>T<sub>1</sub> + m<sub>2</sub>T<sub>2</sub>)/(m<sub>1</sub>+m<sub>2</sub>).**   
 
  Temperature transfer over time will be modelled using the following equation:
- T<sub>n(t)</sub> = T<sub>final</sub> + ( T<sub>n(0)</sub> - T<sub>final)</sub>e<sup>(-kt)</sup>
+**T<sub>n(t)</sub> = T<sub>final</sub> + ( T<sub>n(0)</sub> - T<sub>final</sub>)e<sup>(-kt)</sup>**
+
+Initial conditions such as mass and specific heat capacity can be altered to simulate a variety of conducting materials.
 
 # Serial implemetation 
 # Parallel implementation
