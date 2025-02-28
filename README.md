@@ -44,4 +44,4 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 # Parallel implementation
 # Limitations
 ## Bench marking
-#Serial 
+For serial implementationthere is little between real ,user and system times. The real time it takes for the system to run with 10 elements is 0.012 s, for user time 0.005, 0.001 .For 2 elements the real, user and system times wer 0.011s, 0.005s and <0.000s respectively.Fro 1000 elements the the real user and system times were 0.047s, 0.014 and 0.005s respectively. Notice the greatest increase in the real time while the system times remains low
