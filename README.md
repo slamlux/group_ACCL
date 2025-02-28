@@ -1,6 +1,6 @@
 # Group_ACCL
 # Basis of the model - Thermodynamic Equilibrium in Conducting Materials
-The main principle of this model is to examine the processes involved in reaching thermodynamic equilibrium in a conducting material, and to output the       equilibrium temperature. This model is based on a material experiencing heating at one end, and follows the flow of heat throughout the material. The code takes an imput which will be the number of segments in which the material is examined for temperature. The purpose of segmenting the material is to observe the behaviour of the the heat transfer over time in specific regions. The final output will be the temperature of the material once thermal equilibrium has been reached. 
+The main principle of this model is to examine the processes involved in reaching thermodynamic equilibrium in a conducting material, and to output the quilibrium temperature. This model is based on a material experiencing heating at one end, and follows the flow of heat throughout the material. The code takes an imput which will be the number of segments in which the material is examined for temperature. The purpose of segmenting the material is to observe the behaviour of the the heat transfer over time in specific regions. The final output will be the temperature of the material once thermal equilibrium has been reached. To run this code a directory titled "data" must be established. All results from this program will be stored within this directory.
 # Assumptions of the model
 There are a number of asumptions made when modeling this process, the first of which is to assume there is perfect contact with the heat supply, whether this be another material or otherwise. It is also assumed that there is no heat or work transfer between the environment and the conducting body. 
 The model will initially be examined on a macroscopic level, for this the _First Law of Thermodynamics_ will be implemented: **ΔU = Q – W** 
@@ -20,5 +20,26 @@ Each segment will be represented by a vector. Each vector will describe qualties
 Initial conditions such as mass and specific heat capacity can be altered to simulate a variety of conducting materials.
 
 # Serial implemetation 
+**Main steps in program**
+
+**Initialise_vector** - Used initialise all values in the vector to a set value. These values are then iterated through the vector size and the elements of the vector are then set to the initial vector size. 
+
+**T_equilibrium_global** - This function takes an average of the temperature values for a set number of segments and produces the global equilibrium temperature. 
+
+**T_equilibrium** - Finds the equilibrium temperature between two individual neighbouring segments.
+
+**T_time** - This is used to create a timestamp for temperature measurements.
+
+**check_args** - This function will declare and initialise the given numerical argument and determine if the argument is within the allowed raneg of values, if not, the program is terminated and an error is raised, otherwise num_arg is returned and the program runs as expected.
+
+**print_header** - Prints a header to a file, a double-pointer is featured to allow movement of the file pointer by the function.
+
+**update_temperatures** -  Used to define a function which will update the positions of the vector. A temporary vector is created for the new position of the particle which is enevitabley overwritten after implementing formulas to determine accurate position vectors. The temporary vector is freed once the new position vector is computed.
+
+**generate_timestamps** - Loops through the step size and defines a set of timestamps.
+
+**main()** - This function performs the main calculations, all previously defined values are called and the equilibrium temperature is defined. The equilibrium temperature is ouput and saved as a csv file which can then be used to create a graph describing the temperature of the conductor over time.
+
+
 # Parallel implementation
 # Limitations
