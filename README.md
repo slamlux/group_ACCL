@@ -22,7 +22,7 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 # Serial implemetation 
 **Main steps in program**
 
-**Initialise_vector** - Used initialise all values in the vector to a set value. These values are then iterated through the vector size and the elements of the vector are then set to the initial vector size. 
+**Initialise_vector** - Used to initialise all values in the vector to a set value. These values are then iterated through the vector size and the elements of the vector are then set to the initial vector size. 
 
 **T_equilibrium_global** - This function takes an average of the temperature values for a set number of segments and produces the global equilibrium temperature. 
 
