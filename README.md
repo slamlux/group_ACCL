@@ -12,7 +12,10 @@ Before applying the heat transfer equation, the conducting particles will be ass
 The system will be examined at a microscopic level too, this is done by segmenting the length of the conductor into smaller regions of length/area _dx_. The program will initially be modeled on a 1D system and then developed to fit a 2D system. 
 
 Each segment will be represented by a vector. Each vector will describe qualties of the segment such as position, temperature, nearest neighbour temperature, specific heat capacity, mass, and density. The macroscopic system will be modeled using equations for thermal equilibrium between two bodies:
-        T<sub>eq</sub> = (m<sub>1</sub>T<sub>1</sub> + m<sub>2</sub>T<sub>2</sub>)/(m<sub>1</sub>+m<sub>2</sub>).        
+ **T<sub>eq</sub> = (m<sub>1</sub>T<sub>1</sub> + m<sub>2</sub>T<sub>2</sub>)/(m<sub>1</sub>+m<sub>2</sub>).**   
+
+ Temperature transfer over time will be modelled using the following equation:
+ T<sub>n(t)</sub> = T<sub>final</sub> + ( T<sub>n(0)</sub> - T<sub>final)</sub>e<sup>(-kt)</sup>
 
 # Serial implemetation 
 # Parallel implementation
