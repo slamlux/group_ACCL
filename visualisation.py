@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import datetime
 import numpy as np
 
-array = pd.read_csv('temperatures_over_time.csv')
+array = pd.read_csv('data/temperatures_over_time.csv')
 
 print(f"Columns: {array.columns}")
 
