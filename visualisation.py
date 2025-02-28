@@ -50,6 +50,7 @@ def plot_csv(temperatures_over_time, Time, Temperature):
     plt.xlabel('Time')
     plt.ylabel('Temperature')
     plt.title('Temperature vs Time')
+    plt.xlim(0,12)
     plt.ylim(250,320)
     plt.grid(True)
     plt.grid(False)
