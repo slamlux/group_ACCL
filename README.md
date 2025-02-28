@@ -9,7 +9,7 @@ It will be assumed that the work done in the system is zero, therefore the equat
 
 Before applying the heat transfer equation, the conducting particles will be assigned some mass and specific heat capacity.
 
-The system will be examined at a microscopic level too, this is done by partitioning the length of the conductor into smaller regions of length/area _dx_. The program will initially be modeled on a 1D system and then developed to fit a 2D system. 
+The system's topologie will be examined at a microscopic level too, this is done by partitioning the length of the conductor into smaller regions of length/area _dx_. The program will initially be modeled on a 1D system and then developed to fit a 2D system. 
 
 Each segment will be represented by a vector. Each vector will describe qualties of the segment such as position, temperature, nearest neighbour temperature, specific heat capacity, mass, and density. The macroscopic system will be modeled using equations for thermal equilibrium between two bodies:
  **T<sub>eq</sub> = (m<sub>1</sub>T<sub>1</sub> + m<sub>2</sub>T<sub>2</sub>)/(m<sub>1</sub>+m<sub>2</sub>).**   
