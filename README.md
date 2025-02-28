@@ -32,7 +32,7 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 
 **check_args** - This function will declare and initialise the given numerical argument and determine if the argument is within the allowed range of values, if not, the program is terminated and an error is raised, otherwise num_arg is returned and the program runs as expected.
 
-**print_header** - Prints a header to a file, a double-pointer is featured to allow movement of the file pointer by the function.
+**print_header** - Prints a header to a file. A double-pointer is featured to allow movement of the file pointer by the function.
 
 **update_temperatures** -  Used to define a function which will update the positions of the vector. A temporary vector is created for the new position of the particle which is inevitabley overwritten after implementing formulas to determine accurate position vectors. The temporary vector is freed once the new position vector is computed.
 
