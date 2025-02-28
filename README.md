@@ -43,3 +43,5 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 
 # Parallel implementation
 # Limitations
+## Bench marking
+#Serial 
