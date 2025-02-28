@@ -4,7 +4,16 @@ The main principle of this model is to examine the processes involved in reachin
 # Assumptions of the model
 There are a number of asumptions made when modeling this process, the first of which is to assume there is perfect contact with the heat supply, whether this be another material or otherwise. It is also assumed that there is no heat or work transfer between the environment and the conducting body. 
 The model will initially be examined on a macroscopic level, for this the _First Law of Thermodynamics_ will be implemented: **ΔU = Q – W** 
+
 It will be assumed that the work done in the system is zero, therefore the equation will become: **ΔU = Q**
+
+Before applying the heat transfer equation, the conducting particles will be assigned some mass and specific heat capacity.
+
+The system will be examined at a microscopic level too, this is done by segmenting the length of the conductor into smaller regions of length/area _dx_. The program will initially be modeled on a 1D system and then developed to fit a 2D system. 
+
+Each segment will be represented by a vector. Each vector will describe qualties of the segment such as position, temperature, nearest neighbour temperature, specific heat capacity, mass, and density. The macroscopic system will be modeled using equations for thermal equilibrium between two bodies:
+        T (<sub>eq</sub>) = (m1T1 +m2T2)/(m1+m2).        
+
 # Serial implemetation 
 # Parallel implementation
 # Limitations
