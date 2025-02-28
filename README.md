@@ -34,7 +34,7 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 
 **print_header** - Prints a header to a file, a double-pointer is featured to allow movement of the file pointer by the function.
 
-**update_temperatures** -  Used to define a function which will update the positions of the vector. A temporary vector is created for the new position of the particle which is enevitabley overwritten after implementing formulas to determine accurate position vectors. The temporary vector is freed once the new position vector is computed.
+**update_temperatures** -  Used to define a function which will update the positions of the vector. A temporary vector is created for the new position of the particle which is inevitabley overwritten after implementing formulas to determine accurate position vectors. The temporary vector is freed once the new position vector is computed.
 
 **generate_timestamps** - Loops through the step size and defines a set of timestamps.
 
