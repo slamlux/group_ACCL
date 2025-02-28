@@ -47,11 +47,11 @@ def plot_csv(temperatures_over_time, Time, Temperature):
     plt.plot(df[Time], df[Temperature], marker='o', linestyle='-')
 
     # Labels and title
-    plt.xlabel('Time')
-    plt.ylabel('Temperature')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Temperature (Kelvin)')
     plt.title('Temperature vs Time')
     plt.xlim(0,12)
-    plt.ylim(250,320)
+    plt.ylim(265,320)
     plt.grid(True)
     plt.grid(False)
     plt.legend(Temperature)
