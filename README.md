@@ -38,7 +38,7 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 
 **generate_timestamps** - Loops through the step size and defines a set of timestamps.
 
-**main()** - This function performs the main calculations, all previously defined values are called and the equilibrium temperature is defined. The equilibrium temperature is ouput and saved as a csv file which can then be used to create a graph describing the temperature of the conductor over time.
+**main()** - This function performs the main calculations. All previously defined values are called and the equilibrium temperature is defined. The equilibrium temperature is ouputted and saved as a csv file which can then be used to create a graph describing the temperature of the conductor over time.
 
 
 # Parallel implementation
