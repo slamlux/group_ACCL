@@ -30,7 +30,7 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 
 **T_time** - This is used to create a timestamp for temperature measurements.
 
-**check_args** - This function will declare and initialise the given numerical argument and determine if the argument is within the allowed raneg of values, if not, the program is terminated and an error is raised, otherwise num_arg is returned and the program runs as expected.
+**check_args** - This function will declare and initialise the given numerical argument and determine if the argument is within the allowed range of values, if not, the program is terminated and an error is raised, otherwise num_arg is returned and the program runs as expected.
 
 **print_header** - Prints a header to a file, a double-pointer is featured to allow movement of the file pointer by the function.
 
