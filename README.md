@@ -20,7 +20,7 @@ Each segment will be represented by a vector. Each vector will describe qualties
 Initial conditions such as mass and specific heat capacity can be altered to simulate a variety of conducting materials.
 
 # Serial implemetation 
-## Main steps in program 
+## Key features in program 
 
 **Initialise_vector** - Used to initialise all values in the vector to a set value. These values are then iterated through the vector size and the elements of the vector are then set to the initial vector size. 
 
@@ -44,6 +44,26 @@ Initial conditions such as mass and specific heat capacity can be altered to sim
 For serial implementation there is little between real, user and system times. The real time it takes for the system to run with 10 elements is 0.012 s, for user time 0.005, 0.001. For 2 elements the real, user and system times wer 0.011s, 0.005s and <0.000s respectively.For 1000 elements the the real, user and system times were 0.047s, 0.014 and 0.005s respectively. Notice the greatest increase in the real time while the system times remains low. At 200,000 elements the processing times starts to become observably slower with real, user and system times of 3.128s , 2.185s and 0.185s.A significant increase in processing time is then observed. With 1 million elements in the simulation the real, user and systems times take 11.962 s, 10.852s, and 0.744s . These times for 10 million are 118.559s, 108.096s and 8.566 s. The time doubled for 20 million with times of 233.66s, 216.489s and 16.4s.The real and user times are much greater than the system times. 16.4 seconds is long for a system time. By graphing these results, the processing time of the serial system appears to increase linearly. To conclude this serially implemented system appears to be designed for use cases when the number of elements are one-hundred-thousand or less.
 
 # Parallel implementation
+The main difference between the serial and parallel program is the inclusion of <mpi.h>. This allows for parallel computation and will use a message passing interface to carry out many of the functions. 
+## Key Features in program
+The functions listed above in the serial implementation are all used in the same manner, however there are a number of additional functions which are as follows:
+
+**MPI_Init()** - This will initialise the MPI environment and allows for further use of MPI processing
+
+**MPI_Comm_rank()** - This will obtain the rank of the process being computed.
+
+**MPI_Comm_size()** - Calculates the total number of prosesses required. 
+
+**MPI_Finalize()** - Used to finalize the MPI environment and clean up resources, malloc() is used to allocate dynamic memory which will ultimately be freed, as in the serial code.
+
+**MPI_Allgather()** - Gathers updated data from all individual processes and will redistribute them to the main function for further calculation
+
+**Main uses of parallel computation**
+
+The temperature array is divided among different MPI processes which can all be gathered once they obtain results. Each node is responsible for a single task and the result is passed on to the main function. These tasks may be to find the final equilibrium temperature, find the temperature at specific times given set time steps, current temperature and equilibrium temperature, and lastly  to update the temperature based on data from neighbouring segments.
+Synchronisation of processes is ensured due to the use of MPI_Gather() and MPI_Allgather() after each updating step. These will continuously hold the latest and most updated values. Using MPI allows the program to handle larger data sets. This is because the large processes seen with the serial program are broken down into multiple processes which will allow for easier and more efficient computation.
+
+
 # Limitations
 The main limitations to this model are due to the assumptions made when writing the program These assumptions stray from real life scenarios in which one would expect to experience when examining a body experiencing heating. The main limitation is that it is assumed there is no work done or heat loss in the system. This can happen in some circumstances but it is very rare. This means the results obtained can not be said to be fully representative of typical heating systems. 
 
