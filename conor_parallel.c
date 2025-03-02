@@ -4,11 +4,10 @@
 #include <mpi.h>
 
 void initialise_vector(double vector[], int size, double initial);
-double T_equilibrium_global(int T0, int T1, int T2);
 double T_equilibrium(double T0, double T1);
 double T_time(double T_eq, double T0, double step_size);
 int check_args(int argc, char **argv);
-void print_header(FILE** p_out_file, int points);
+void print_header(FILE* out_file, int points);
 void update_temperatures(double* temperatures, int points, double time_step, int rank, int size);
 int generate_timestamps(double* timestamps, int time_steps, double step_size);
 
@@ -36,12 +35,22 @@ int main(int argc, char **argv)
     FILE* out_file = NULL;
     if (rank == 0) {
         out_file = fopen("data/temperatures_over_time.csv", "w");
-        print_header(&out_file, points);
+        if (!out_file) {
+            fprintf(stderr, "Error opening file!\n");
+            MPI_Abort(MPI_COMM_WORLD, 1);
+        }
+        print_header(out_file, points);
     }
 
     for (int i = 0; i < time_steps; i++)
     {
         update_temperatures(temperatures, points, step_size, rank, size);
+        
+        // Gather all temperatures to rank 0 for output
+        MPI_Gather(temperatures + rank * (points / size), points / size, MPI_DOUBLE,
+                   temperatures, points / size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+        // Rank 0 writes the data to the file
         if (rank == 0)
         {
             fprintf(out_file, "%d, %lf", i, time_stamps[i]);
@@ -68,11 +77,6 @@ void initialise_vector(double vector[], int size, double initial)
     }
 }
 
-double T_equilibrium_global(int T0, int T1, int T2)
-{
-    return (T0 + T1 + T2) / 3.0;
-}
-
 double T_equilibrium(double T0, double T1)
 {
     return (T0 + T1) / 2.0;
@@ -97,14 +101,14 @@ int check_args(int argc, char **argv)
     }
 }
 
-void print_header(FILE** p_out_file, int points)
+void print_header(FILE* out_file, int points)
 {
-    fprintf(*p_out_file, "#, time");
+    fprintf(out_file, "#, time");
     for (int j = 0; j < points; j++)
     {
-        fprintf(*p_out_file, ", y[%d]", j);
+        fprintf(out_file, ", y[%d]", j);
     }
-    fprintf(*p_out_file, "\n");
+    fprintf(out_file, "\n");
 }
 
 void update_temperatures(double* temperatures, int points, double time_step, int rank, int size)
@@ -114,7 +118,7 @@ void update_temperatures(double* temperatures, int points, double time_step, int
     int end = (rank == size - 1) ? points : start + local_size;
 
     double* new_temperatures = (double*) malloc(points * sizeof(double));
-    
+
     for (int i = start; i < end; i++)
     {
         if (i > 0 && i < points - 1) {
