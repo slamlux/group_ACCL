@@ -97,16 +97,6 @@ int check_args(int argc, char **argv)
     }
 }
 
-;
-if (rank == 0) {
-    out_file = fopen("data/temperatures_over_time.csv", "w");
-    if (!out_file) {
-        fprintf(stderr, "Error opening file!\n");
-        MPI_Abort(MPI_COMM_WORLD, 1);
-    }
-    print_header(&out_file, points);
-}
-
 void print_header(FILE** p_out_file, int points)
 {
     fprintf(*p_out_file, "#, time");
