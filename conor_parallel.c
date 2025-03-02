@@ -111,6 +111,29 @@ void print_header(FILE* out_file, int points)
     fprintf(out_file, "\n");
 }
 
+//void update_temperatures(double* temperatures, int points, double time_step, int rank, int size)
+{
+//    int local_size = points / size;
+ //   int start = rank * local_size;
+ //   int end = (rank == size - 1) ? points : start + local_size;
+
+   // double* new_temperatures = (double*) malloc(points * sizeof(double));
+
+    //for (int i = start; i < end; i++)
+    //{
+      //  if (i > 0 && i < points - 1) {
+        //    double T_eq1 = T_equilibrium(temperatures[i], temperatures[i + 1]);
+          //  double T_eq2 = T_equilibrium(temperatures[i], temperatures[i - 1]);
+            //double T1 = T_time(T_eq1, temperatures[i], time_step);
+           // double T2 = T_time(T_eq2, temperatures[i], time_step);
+           // new_temperatures[i] = T1 + T2 - temperatures[i];
+        //}
+    //}
+
+   // MPI_Allgather(new_temperatures + start, local_size, MPI_DOUBLE, temperatures, local_size, MPI_DOUBLE, MPI_COMM_WORLD);
+   // free(new_temperatures);
+//}
+
 void update_temperatures(double* temperatures, int points, double time_step, int rank, int size)
 {
     int local_size = points / size;
@@ -122,14 +145,20 @@ void update_temperatures(double* temperatures, int points, double time_step, int
     for (int i = start; i < end; i++)
     {
         if (i > 0 && i < points - 1) {
+            // Compute the temperature equilibrium with neighbors
             double T_eq1 = T_equilibrium(temperatures[i], temperatures[i + 1]);
             double T_eq2 = T_equilibrium(temperatures[i], temperatures[i - 1]);
+
+            // Calculate the time evolution of the temperature based on equilibrium
             double T1 = T_time(T_eq1, temperatures[i], time_step);
             double T2 = T_time(T_eq2, temperatures[i], time_step);
+
+            // New temperature is the weighted average of the neighboring equilibrium temperatures
             new_temperatures[i] = T1 + T2 - temperatures[i];
         }
     }
 
+    // Gather all temperatures from all processes for final result
     MPI_Allgather(new_temperatures + start, local_size, MPI_DOUBLE, temperatures, local_size, MPI_DOUBLE, MPI_COMM_WORLD);
     free(new_temperatures);
 }
