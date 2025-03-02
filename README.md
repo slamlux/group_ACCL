@@ -46,5 +46,7 @@ For serial implementation there is little between real, user and system times. T
 # Parallel implementation
 # Limitations
 The main limitations to this model are due to the assumptions made when writing the program, these assumptions stray from real life scenarios in whic one would expect to experience when examining a body experiencing heating. The main limitation is that it is assumed there is no work done or heat loss in the system, this can happen in some circumstances but it is very rare. This means the results obtained can not be said to be fully representative of typical heating systems. 
+
 The program is based on separate segments all experiencing the same heating, again, this is not fully representative of real life scenarios. Realistically, there are no segmented confines in which particles are being heated in a conductor, heat transfer may actually happen faster or slower for some particles than is modelled in this program. 
+
 The growth of the data file when increasing the number of elements being computed can limit the effectivness of this program. For most applications it is desireable to have a very fast program that allows results to be obtained in seconds regardless of the number of iterations or elements in the system. This is not the case for the serial implementation of the code as can be seen from the benchmarking testing. Large numbers of elements require much larger computational times and output much larger data file which may be impractical.
