@@ -97,8 +97,8 @@ int check_args(int argc, char **argv)
     }
 }
 
-{
-if (rank == 0) {
+
+(if (rank == 0) {
     out_file = fopen("data/temperatures_over_time.csv", "w");
     if (!out_file) {
         fprintf(stderr, "Error opening file!\n");
