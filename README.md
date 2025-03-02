@@ -71,3 +71,23 @@ The main limitations to this model are due to the assumptions made when writing 
 The program is based on separate segments all experiencing the same heating, again, this is not fully representative of real life scenarios. Realistically, there are no segmented confines in which particles are being heated in a conductor. Heat transfer may actually happen faster or slower for some particles than is modelled in this program. 
 
 The growth of the data file when increasing the number of elements being computed can limit the effectivness of this program. For most applications it is desireable to have a very fast program that allows results to be obtained in seconds regardless of the number of iterations or elements in the system. This is not the case for the serial implementation of the code as can be seen from the benchmarking testing. Large numbers of elements require much larger computational times and output much larger data files which may be impractical.
+# How to run the code
+The serial implementation of the code can be run by first compiling the code as follows:
+
+gcc group_ACCL/serial_temp.c -o bin/serial_temp -lm
+
+the code can then be executed from the home repository of the commandline with the following:
+
+bin/serial_temp chunks (the number of chunks the bulk metal is diveded into e.g 6)
+
+To compile the parallel code the following should be used:
+
+mpicc group_ACCL/parallel.c -o bin/parallel -lm
+
+the code can then be executed from the home repository of the commandline with the following:
+
+mpirun -np number of processors (e.g 3) bin/serial_temp chunks (the number of chunks the bulk metal is diveded into e.g 6)
+
+an example input is as follows:
+
+mpirun -np 3 bin/serial_temp chunks 6
