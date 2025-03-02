@@ -112,7 +112,7 @@ void print_header(FILE* out_file, int points)
 }
 
 //void update_temperatures(double* temperatures, int points, double time_step, int rank, int size)
-{
+//{
 //    int local_size = points / size;
  //   int start = rank * local_size;
  //   int end = (rank == size - 1) ? points : start + local_size;
